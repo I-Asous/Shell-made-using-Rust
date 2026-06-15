@@ -1,13 +1,22 @@
-use std::io::stdin;
+use std::io::{stdin, stdout, Write};
 use std::process::Command;
 
-fn main() {
-    let mut input = String::new();
-    stdin().read_line(&mut input).unwrap();
+fn main(){
+    loop {
+        // use the `>` as the prompt
+        print!("> ");
+        stdout().flush();
 
-    let command= input.trim();
+        let mut input = String::new();
+        stdin().read_line(&mut input).unwrap();
 
-    Command::new(command)
-        .spawn()
-        .unwrap();
+        let command = input.trim();
+
+        let mut child = Command::new(command)
+            .spawn()
+            .unwrap();
+
+        // don't accept another command until this one completes
+        child.wait(); 
+    }
 }
