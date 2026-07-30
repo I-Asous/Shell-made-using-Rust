@@ -70,7 +70,6 @@ fn main(){
         }
 
         if let Some(mut final_command) = previous_command {
-            // block until the final command has finished
             final_command.wait();
         }
 
